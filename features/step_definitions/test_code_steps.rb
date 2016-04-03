@@ -20,6 +20,9 @@ end
 
 Then(/^I should see the following text "([^"].*)"$/) do |quotation|
 
+  wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+  wait.until { !(@demo_page.text_display.text == 'Text Content') }
+
   #remove additional quotes from actual otherwise
 
   # RSpec::Expectations::ExpectationNotMetError:

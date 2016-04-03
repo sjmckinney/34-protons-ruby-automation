@@ -21,6 +21,5 @@ end
 # turn off Capybara's racker server
 Capybara.run_server = false
 
-#Capybara.app_host = 'http://www.34protons.co.uk/demo_2_0'
-#Capybara.app_host = 'http://localhost/~stephenmckinney/34protons'
-Capybara.app_host = 'http://localhost/34protons'
+Capybara.app_host = 'http://www.34protons.co.uk/demo_2_0'
+#Capybara.app_host = 'http://localhost/34protons'

@@ -69,6 +69,7 @@ class TextMenu < SitePrism::Section
 end
 
 
+=begin
 class TextDisplay < SitePrism::Section
 
   element(:delay_input, '#inputDelay')
@@ -83,6 +84,7 @@ class TextDisplay < SitePrism::Section
   end
 
 end
+=end
 
 class RadioButtons < SitePrism::Section
 
