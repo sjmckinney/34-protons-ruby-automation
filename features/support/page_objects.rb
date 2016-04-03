@@ -78,8 +78,12 @@ class DragNDrop < SitePrism::Section
 
   def drag_globe(repetitions)
 
-    r = 1..repetitions.to_i
-    r.each {globe_icon.drag_to(drag_target)}
+    #debug: page.has_selector?(:xpath, globe_icon.path, :wait => 2)
+
+    r = 0..repetitions.to_i
+    r.each { |i| globe_icon.drag_to(drag_target) }
+
+    #debug: page.has_selector?(:xpath, "#{drag_target.path}/img", :wait => 1)
 
   end
 
@@ -98,23 +102,67 @@ class HiddenText < SitePrism::Section
 
   def is_visible(css)
 
+    #wait = Selenium::WebDriver::Wait.new(:timeout => 5) #ignore: Selenium::WebDriver::Error::NoAlertPresentError
+    #wait.until { page.has_css?("##{css}", :text => "#{text}", :visible => true) }
+
     if(css == 'block')
       text = 'Display Block Text'
+      page.has_selector?('#block', :visible => true) &&
+      page.has_selector?('#block', :visible => false) &&
+      page.has_css?('#block', :text => "#{text}", :visible => true) &&
+      page.has_css?('#block', :text => "#{text}", :visible => false)
     else
       text = 'Display None Text'
+      page.has_css?('#none', :text => "#{text}", :visible => false) &&
+      page.has_no_css?('#none', :text => "#{text}", :visible => true) &&
+      page.has_selector?('#none', :text => "#{text}", :visible => false) &&
+      page.has_no_selector?('#none', :text => "#{text}", :visible => true)
     end
 
-    if (page.has_selector?('#none', :visible => false, :wait => 2))
-      puts 'exit'
-      return
-    end
+=begin
 
-    puts 'continued'
+  #block element is always visible (<p style="display: block;" id="block"><i>Display Block Text</i></p>)
 
-    wait = Selenium::WebDriver::Wait.new(:timeout => 10) #ignore: Selenium::WebDriver::Error::NoAlertPresentError
-    wait.until { page.has_css?("##{css}", :text => "#{text}", :visible => true) }
+  hence
 
-    #page.has_no_css?("##{css}", :text => "#{text}", :visible => true) would pass where text = "none"
+  (NOTE: the value of visible has not effect only whether 'has_selector?' or 'has_no_selector?')
+
+  page.has_selector?('#block', :visible => false, :wait => 2)
+  => true
+
+  page.has_selector?('#block', :visible => true, :wait => 2)
+  => true
+
+  page.has_no_selector?('#block', :visible => false, :wait => 2)
+  => false
+
+  page.has_no_selector?('#block', :visible => true, :wait => 2)
+  => false
+
+  #none element is always hidden (<p style="display: none;" id="none"><i>Display None Text</i></p>)
+
+  hence
+
+  (NOTE: the value of visible has an equal but opposite effect on both 'has_selector?' or 'has_no_selector?')
+
+  page.has_selector?('#none', :visible => false, :wait => 2)
+  => true
+
+  page.has_no_selector?('#none', :visible => true, :wait => 2)
+  => true
+
+  page.has_selector?('#none', :visible => true, :wait => 2)
+  => false
+
+  page.has_no_selector?('#none', :visible => false, :wait => 2)
+  => false
+
+=end
+
+    #wait = Selenium::WebDriver::Wait.new(:timeout => 5) #ignore: Selenium::WebDriver::Error::NoAlertPresentError
+    #wait.until { page.has_css?("##{css}", :text => "#{text}", :visible => true) }
+
+    #debug: page.has_no_css?("##{css}", :text => "#{text}", :visible => true) would pass where text = "none"
 
   end
 

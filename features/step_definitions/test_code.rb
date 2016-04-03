@@ -62,7 +62,7 @@ end
 
 Then(/^table row (\d+) should contain "([^"]*)"$/) do |row_nos, values|
 
-  expect(@demo_page.table.get_row_values(row_nos)).to eq(values.delete(','))
+  expect(@demo_page.table.get_row_values(row_nos).delete(',')).to eq(values.delete(','))
 
 end
 
@@ -80,12 +80,17 @@ Then(/^the counter should display "([^"]*)"$/) do |repetitions|
 
 end
 
+Then(/^I expect the the "([^"]*)" element to( ?.*) be visible$/) do |css, result|
 
-When(/^I search for "([^"]*)" elements$/) do |css|
+  expected = false
+
+  if(result == 'true')
+
+    expected = true
+
+  end
 
   expect(@demo_page.hidden.is_visible(css)).to be(true)
 
 end
-
-
 
