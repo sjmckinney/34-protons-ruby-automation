@@ -1,5 +1,89 @@
 #Collection of page Objects on http://www.34protons.co.uk/demo_2_0/
 
+class AjaxDelay < SitePrism::Section
+
+  element(:delay_input, '#inputDelay')
+  element(:delay_indicator, '#delayIndicator')
+
+  def input_delay(delay)
+
+    delay_input.set(delay)
+
+  end
+
+end
+
+class TextMenu < SitePrism::Section
+
+  elements(:category_menu_btns, '.menuParent')
+  elements(:category_sub_menu_btns, '.menuParent li a')
+  elements(:menu_items, '.menuParent li a')
+
+  def select_menu_item(item_text, sub_menu_text, menu_text)
+
+    category_menu_btns.each do |menu_btn|
+
+      if(menu_btn.text == menu_text)
+
+        menu_btn.click
+
+        if(sub_menu_text.empty?)
+
+          select_item(item_text)
+
+        else
+
+          category_sub_menu_btns.each do |sub_menu|
+
+            if(sub_menu.text==sub_menu_text)
+
+              sub_menu.hover
+              select_item(item_text)
+
+            end
+
+          end
+
+        end
+
+      end
+
+    end
+
+  end
+
+  def select_item(item_text)
+
+    menu_items.each do |item|
+
+      if(item.text == item_text)
+
+        item.click
+
+      end
+
+    end
+
+  end
+
+end
+
+
+class TextDisplay < SitePrism::Section
+
+  element(:delay_input, '#inputDelay')
+  elements(:category_menu_btns, '.menuParent')
+  elements(:category_sub_menu_btns, '.menuParent li ul')
+  elements(:menu_items, '.menuParent li a')
+
+  def select_menu_item(menu_text, sub_menu_text, item_text)
+
+    category_menu_btns
+
+  end
+
+end
+
 class RadioButtons < SitePrism::Section
 
   def do_check(rb_name)

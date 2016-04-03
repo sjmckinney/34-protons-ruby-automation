@@ -1,5 +1,17 @@
 Feature: Demo of using Page Objects to define web page using SitePrism framework
 
+  @pom_view_text
+  Scenario: Tests to view text without delay
+    Given I am on the test page
+    When I select the "Oscar Wilde" item from the "Bon mots" menu
+    Then I should see the following text "To love oneself is the beginning of a lifelong romance."
+
+  @pom_view_text
+  Scenario: Tests to view text without delay with sub-menu
+    Given I am on the test page
+    When I select the "Neuromancer" item from the "Opening Lines" menu and "Books" sub-menu
+    Then I should see the following text "William Gibson "The sky above the port was the color of television, tuned to a dead channel" Neuromancer"
+
   @pom_radio_button
   Scenario: Tests for radio button elements
     Given I am on the test page
