@@ -1,6 +1,10 @@
 # SitePrism-Playground
 Code to demonstrate the use of SitePrism framework in organising code.
 
+Once cloned use `bundle install` to install required gems and `bundle exec cucumber` to run feature file.
+
+Individual scenarios have been tagged and can run selectively using `bundle exec cucumber -t@tagname, @other_tagname`.
+
 SitePrism promotes the use of the Page Object Model (POM). Areas of a page with specific purpose can be grouped into
 classes that contains all the code that will interact with and queries the page state. In this way the code organisation
 maps onto the physical layout of the page.
