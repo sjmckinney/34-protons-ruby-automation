@@ -166,7 +166,9 @@ class DragNDrop < SitePrism::Section
 
     #debug: page.has_selector?(:xpath, globe_icon.path, :wait => 2)
 
-    r = 0..repetitions.to_i
+    drag_source.click
+
+    r = 1..repetitions.to_i
     r.each { |i| globe_icon.drag_to(drag_target) }
 
     #debug: page.has_selector?(:xpath, "#{drag_target.path}/img", :wait => 1)
