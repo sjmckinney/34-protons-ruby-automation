@@ -6,10 +6,9 @@ require 'site_prism'
 # if there is a command line argument
 # use that to determine the browser to use
 # else default to Firefox
-# Acceptable values are chrome, ie
+# Acceptable values are chrome, internet_explorer
 
-
-browser = :firefox
+browser = :chrome
 
 Capybara.default_driver = :selenium
 
