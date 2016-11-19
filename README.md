@@ -28,3 +28,47 @@ In the code within this repo the "page object" classes are contained in the file
 The object representing the page is defined in the file demo_page.rb. An instance of the "page" is instaniated in the
 hooks.rb file which contains code that is called each time a scenario is run. In this way responsibility for creation of
 an instance of a page instance is handed off to the Cucumber framework.
+
+**Set up**
+
+There are five configuration parameters specified in the `.env` file in the project root.
+
+**browser**
+
+Select the browser in the tests will be run.
+
+Valid values are;
+
+*chrome*
+
+*firefox*
+
+*internet_explorer*
+
+*edge*
+
+It is technically possible to run tests against safari, opera and phantomjs but it is currently beyond the scope of this project.
+
+**remote**
+
+Whether to run the tests locally or against a client running Selenium server or a Selenium Grid hub.
+
+Valid values are;
+
+*true*
+
+*false*
+
+**app_host**
+
+This is a Capybara construct and is base url against which the tests will be run.
+
+This these tests the url is *http://www.34protons.co.uk/demo_2_0*.
+
+**hub**
+
+This is the url of the system hosting the hub or Selenium server instance.
+
+**platform**
+
+This is used to specify the platform on which the remote tests are to run. The value is used by a Selenium Grid hub to select those nodes are registered with it that are capable of running the tests.
